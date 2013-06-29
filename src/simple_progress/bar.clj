@@ -24,6 +24,8 @@
           :dec (swap! curr (partial - count))))
 
       (when (not noprint)
+        ;; TODO check the window's width
+        ;; https://github.com/trptcolin/reply/issues/75#issuecomment-7198393
         (print (str "\r" (bar->string @curr max))))
       
       @curr)))
