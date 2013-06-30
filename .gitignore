@@ -2,6 +2,7 @@
 *.swo
 *.swp
 *.jar
+.lein-repl-history
 /pom.xml*
 /lib
 /classes
