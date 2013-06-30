@@ -9,8 +9,8 @@ files, use [`progress`](https://github.com/tobias/progress) instead.
 ```clj
 (let [b (mk-progress-bar)]
   (doseq [_ (range 100)]
-    (b) ; display the progress bar
-    (do-something)))
+    (do-something)
+    (b))) ; display the progress bar
 ```
 
 The `simple-progress.bar` module have one public function, `mk-progress-bar`. It
