@@ -30,5 +30,6 @@
             :reset (reset! curr 0))
 
           (print (str "\r" (bar->string @curr max*)))
+          (flush)
         
           @curr)))))
