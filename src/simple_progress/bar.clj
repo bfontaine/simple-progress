@@ -1,31 +1,34 @@
 (ns simple-progress.bar)
 
-(defn bar->string
-  [curr max]
+(defn- bar->string
+  [curr max*]
 
-  ;; TODO
-  (str curr "/" max))
+  (let [percent (min (int (/ (* curr 100) max*)) 100)
+        width (int (* 71 (/ percent 100)))]
+
+    (format
+      "[%3d%%] [%-71.71s]"
+      percent
+      (str (apply str (repeat width "=")) ">"))))
+
 
 (defn mk-progress-bar
   "Return a function which describe a progress bar"
-  [& {:keys [max percents]}]
-  (let [max  (if (or (< 0 max) (not max)) 100 max)
-        percents (or percents (= max 100))
-        curr (atom 0)]
+  ([] (mk-progress-bar 100))
+  ([max*]
+    (let [curr (atom 0)
+          inc* #(min (inc %) max*)
+          dec* #(max (dec %) 0)]
 
-    (fn bar [action & options]
+      (fn bar
+        ([] (bar :inc))
+        ([action]
 
-      (let [noprint (options :noprint)
-            opt     (first options)
-            times   (or (and (number? opt) opt) 1)]
+          (case action
+            :inc   (swap! curr inc*)
+            :dec   (swap! curr dec*)
+            :reset (reset! curr 0))
 
-        (case action
-          :inc (swap! curr (partial + count))
-          :dec (swap! curr (partial - count))))
-
-      (when (not noprint)
-        ;; TODO check the window's width
-        ;; https://github.com/trptcolin/reply/issues/75#issuecomment-7198393
-        (print (str "\r" (bar->string @curr max))))
-      
-      @curr)))
+          (print (str "\r" (bar->string @curr max*)))
+        
+          @curr)))))
