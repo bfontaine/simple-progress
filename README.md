@@ -26,7 +26,7 @@ increment its value and display the bar, with an optional argument:
 
 The bar is displayed after each call, and the current value is returned.
 
-![example][https://raw.github.com/bfontaine/simple-progress/master/doc/example.gif]
+![example](https://raw.github.com/bfontaine/simple-progress/master/doc/example.gif)
 
 
 ## Install
