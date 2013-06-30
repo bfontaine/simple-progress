@@ -4,7 +4,7 @@
   [curr max*]
 
   (let [percent (min (int (/ (* curr 100) max*)) 100)
-        width (int (* 71 (/ percent 100)))]
+        width (int (* percent 71/100))]
 
     (format
       "[%3d%%] [%-71.71s]"
