@@ -1,15 +1,19 @@
 (ns simple-progress.bar)
 
-(defn- bar->string
+(defn- print-bar
   [curr max*]
 
-  (let [percent (min (int (/ (* curr 100) max*)) 100)
-        width (int (* percent 71/100))]
+  (let [percent      (int (/ (*      curr  100) max*))
+        prev-percent (int (/ (* (dec curr) 100) max*))]
 
-    (format
-      "[%3d%%] [%-71.71s]"
-      percent
-      (str (apply str (repeat width "=")) ">"))))
+    ;; don't re-print if the percentage didn't change (#1)
+    (when (not= percent prev-percent)
+      (let [width (int (* percent 71/100))]
+        (print
+          (format
+            "\r[%3d%%] [%-71.71s]"
+            percent
+            (str (apply str (repeat width "=")) ">")))))))
 
 
 (defn mk-progress-bar
@@ -29,7 +33,7 @@
             :dec   (swap! curr dec*)
             :reset (reset! curr 0))
 
-          (print (str "\r" (bar->string @curr max*)))
+          (print-bar @curr max*)
           (flush)
         
           @curr)))))
