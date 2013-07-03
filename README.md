@@ -33,8 +33,8 @@ The bar is displayed after each call, and the current value is returned.
 
 Add the following dependency to your project:
 
-```
-[simple-progress "0.1.1"]
+```clj
+[simple-progress "0.1.2"]
 ```
 
 Then require/use the `simple-progress.bar` module.
