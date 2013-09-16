@@ -22,16 +22,18 @@
   ([max*]
     (let [curr (atom 0)
           inc* #(min (inc %) max*)
-          dec* #(max (dec %) 0)]
+          dec* #(max (dec %) 0)
+          setmax (fn[&_] max*)]
 
       (fn bar
         ([] (bar :inc))
         ([action]
 
           (case action
-            :inc   (swap! curr inc*)
-            :dec   (swap! curr dec*)
-            :reset (reset! curr 0))
+            :inc      (swap! curr inc*)
+            :dec      (swap! curr dec*)
+            :complete (swap! curr setmax)
+            :reset    (reset! curr 0))
 
           (print-bar @curr max*)
           (flush)
