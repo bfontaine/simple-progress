@@ -23,7 +23,7 @@ increment its value and display the bar, with an optional argument:
 - `:inc`: increment the bar value (default)
 - `:dec`: decrement the bar value
 - `:reset`: reset the bar value to `0`
-- `:complete`: set the bar to its maximum value (available in the upcoming 0.1.3)
+- `:complete`: set the bar to its maximum value
 
 The bar is displayed after each call, and the current value is returned.
 
@@ -35,7 +35,7 @@ The bar is displayed after each call, and the current value is returned.
 Add the following dependency to your project:
 
 ```clj
-[simple-progress "0.1.2"]
+[simple-progress "0.1.3"]
 ```
 
 Then require/use the `simple-progress.bar` module.
